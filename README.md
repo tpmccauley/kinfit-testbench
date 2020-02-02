@@ -51,9 +51,35 @@ BPHHistoSpecificDecay.cc  BPHHistoSpecificDecay.h  BPHWriteSpecificDecay.cc  BPH
 
 `Bmm5/NanoAOD/plugins/BxToMuMuProducer`
 
-`fitBtoKJPsiMuMu`
-`fitBtoKJPsiMuMuNew`
+[fitBtoKJPsiMuMu](https://github.com/drkovalskyi/Bmm5/blob/master/NanoAOD/plugins/BxToMuMuProducer.cc#L1192)
+[fitBtoKJPsiMuMuNew](https://github.com/drkovalskyi/Bmm5/blob/master/NanoAOD/plugins/BxToMuMuProducer.cc#L1245)
 
-`Bmm5/Run2018ABC_NanoAOD.py`
+`nano_cff.py`
 
 nanoSequence + BxToMuMuSequence + BxToMuMuTables
+
+```
+KinematicFitResult
+  fitBToKJPsiMuMu( RefCountedKinematicParticle jpsi,
+		   const pat::PackedCandidate& kaon,
+		   bool applyJpsiMassConstraint);
+
+KinematicFitResult
+  fitBToKJPsiMuMuNew( RefCountedKinematicTree jpsi,
+		      const pat::PackedCandidate& kaon,
+		      bool applyJpsiMassConstraint);
+```
+
+```
+struct KinematicFitResult{
+  bool treeIsValid;
+  bool vertexIsValid;
+  RefCountedKinematicVertex      refitVertex;
+  RefCountedKinematicParticle    refitMother;
+  RefCountedKinematicTree        refitTree;
+  std::vector<RefCountedKinematicParticle> refitDaughters;
+  float lxy, lxyErr, sigLxy, cosAlpha;
+  KinematicFitResult():treeIsValid(false),vertexIsValid(false),
+		       lxy(-1.0), sigLxy(-1.0), cosAlpha(-999.)
+  {}
+```
