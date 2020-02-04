@@ -7,7 +7,11 @@ CMSSW_10_2_18
 
 `/store/data/Run2018A/Charmonium/MINIAOD/PromptReco-v2/000/316/239/00000/08BFAB4F-1359-E811-B01F-FA163E5285EC.root`
 
-`voms-proxy-init --rfc --voms cms`
+CMSSW_10_4_0
+
+* https://github.com/gkaratha/cmgtools-lite (a.k.a CMGRK)
+
+Don't forget: `voms-proxy-init --rfc --voms cms`
 
 ## HeavyFlavorAnalysis
 
@@ -84,3 +88,26 @@ struct KinematicFitResult{
 		       lxy(-1.0), sigLxy(-1.0), cosAlpha(-999.)
   {}
 ```
+
+## CMGRK
+
+`CMGTools/Production/scripts/nanopy.py`
+
+`CMGTools/RKAnalysis/cfg/run_RK_fromNanoAOD_cfg.py`:
+
+```
+local run: nanopy.py <folder>  run_RK_fromNanoAOD_cfg.py -N <evts per dataset> -o xxx=yyy
+```
+
+In `run_RK_fromNanoAOD_cfg.py`:
+
+```
+if data:
+  from CMGTools.RootTools.samples.samples_13TeV_BParkingData_NanoAOD import samples as allData
+  Ncomps = allData
+if mc:
+  from CMGTools.RootTools.samples.samples_13TeV_BParkingMC_NanoAOD import samples as allMC
+  Ncomps = Ncomps + allMC    
+```
+
+`CMGTools/RootTools/python/samples/samples_13TeV_BParkingData_NanoAOD.py`
